@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guitar Theory · Sổ tay học nhạc lý</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="dashboard" data-root="">
+  <div class="backdrop"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar">
+        <button class="btn ghost small" id="menu-toggle" type="button" aria-label="Mở mục lục">☰</button>
+        <span class="crumb">Tổng quan</span>
+        <button class="btn small" id="theme-toggle" type="button">Sáng</button>
+      </header>
+
+      <div class="dash">
+        <div class="hero">
+          <div class="hero-top">
+            <div>
+              <div class="eyebrow">Tom Kolb <span>· Music Theory for Guitarists</span></div>
+              <h1>Sổ tay học nhạc lý guitar</h1>
+              <p class="lead">13 chương ghi chú, quiz và flashcard. Không có lịch cố định — học chương nào
+                cũng được, ôn theo mức bạn thực sự nhớ.</p>
+            </div>
+            <a class="btn primary" id="continue-btn" href="chapters/ch01-fretboard.html">Học tiếp</a>
+          </div>
+          <div class="overall">
+            <div class="overall-bar" id="overall-bar"><span style="width:0%"></span></div>
+            <div class="overall-meta"><span id="overall-pct">0%</span><span id="overall-meta">Đã nhớ 0/0 mục</span></div>
+          </div>
+        </div>
+
+        <div class="dash-grid">
+          <div class="panel review-box">
+            <div class="panel-head">
+              <h2><span class="kicker">Hôm nay</span>Ôn tập</h2>
+              <span class="badge" id="streak">0 ngày</span>
+            </div>
+            <div class="review-count" id="review-count">0 <small>thẻ đến hạn</small></div>
+            <p class="read-note" style="margin:0">Lịch ôn ngắt quãng: Again 10 phút · Hard 1 ngày · Good 3 ngày.</p>
+            <a class="btn primary" id="review-btn" href="chapters/ch01-fretboard.html?review=1">Ôn ngay</a>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h2><span class="kicker">Cách học</span>3 bước</h2></div>
+            <ol class="read-note" style="margin:0;padding-left:18px;line-height:1.8;font-size:14px">
+              <li>Tự trả lời "5 điều bắt buộc nhớ" trước khi đọc ghi chú.</li>
+              <li>Đọc và chơi các bài tập trên đàn.</li>
+              <li>Làm quiz, lật flashcard và tự chấm Again/Hard/Good.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="search-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path>
+          </svg>
+          <input id="chapter-search" type="search" placeholder="Tìm chương hoặc thuật ngữ: hợp âm, mode, tab, quãng...">
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin:28px 0 12px;flex-wrap:wrap">
+          <h2 style="margin:0;font-size:18px">13 chương</h2>
+          <a class="btn small" href="glossary.html">Tra cứu thuật ngữ A–Z</a>
+        </div>
+        <div class="chapter-grid" id="chapter-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/data/manifest.js"></script>
+  <script src="assets/data/ch01.js"></script>
+  <script src="assets/data/ch02.js"></script>
+  <script src="assets/data/ch03.js"></script>
+  <script src="assets/data/ch04.js"></script>
+  <script src="assets/data/ch05.js"></script>
+  <script src="assets/data/ch06.js"></script>
+  <script src="assets/data/ch07.js"></script>
+  <script src="assets/data/ch08.js"></script>
+  <script src="assets/data/ch09.js"></script>
+  <script src="assets/data/ch10.js"></script>
+  <script src="assets/data/ch11.js"></script>
+  <script src="assets/data/ch12.js"></script>
+  <script src="assets/data/ch13.js"></script>
+  <script src="assets/diagrams.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
