@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tra cứu thuật ngữ — Guitar Theory</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/shell.css">
+</head>
+<body data-page="glossary" data-book="mtg-kolb" data-root=".." data-book-root=".">
+  <div class="backdrop"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar">
+        <button class="btn ghost small" id="menu-toggle" type="button" aria-label="Mở mục lục">☰</button>
+        <span class="crumb">Tra cứu thuật ngữ</span>
+        <button class="btn small" id="theme-toggle" type="button">Sáng</button>
+      </header>
+
+      <div class="dash">
+        <div class="eyebrow">Index of Musical Terms</div>
+        <h1>Tra cứu thuật ngữ</h1>
+        <p class="lead">Toàn bộ thuật ngữ trong sách, kèm nghĩa ngắn và chương tương ứng. Dùng khi đang
+          đọc chart hoặc chơi đàn mà quên một khái niệm.</p>
+
+        <div class="search-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path>
+          </svg>
+          <input id="glossary-search" type="search" placeholder="Tìm thuật ngữ hoặc nghĩa tiếng Việt...">
+        </div>
+
+        <div class="letter-row" id="letter-row"></div>
+        <div class="gloss-count" id="gloss-count"></div>
+        <div id="glossary-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="data/book.js"></script>
+  <script src="data/glossary.js"></script>
+  <script src="../assets/diagrams.js"></script>
+  <script src="../assets/shell.js"></script>
+  <script>
+    (function () {
+      const host = document.getElementById("glossary-list");
+      const countEl = document.getElementById("gloss-count");
+      const search = document.getElementById("glossary-search");
+      const letterRow = document.getElementById("letter-row");
+      const chapters = window.BOOK.chapters || [];
+      const items = window.GLOSSARY || [];
+
+      function plain(value) {
+        return String(value)
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "");
+      }
+
+      function letterOf(term) {
+        const first = term.charAt(0).toUpperCase();
+        return /[A-Z]/.test(first) ? first : "#";
+      }
+
+      const decorated = items.map((item) => {
+        const chapter = chapters.find((ch) => ch.num === item.c);
+        return Object.assign({}, item, {
+          letter: letterOf(item.t),
+          href: chapter ? "chapters/" + chapter.file : "",
+          search: plain(item.t + " " + item.vi + " chương " + item.c)
+        });
+      });
+
+      const letters = ["Tất cả"].concat(Array.from(new Set(decorated.map((item) => item.letter))).sort((a, b) => a === "#" ? -1 : b === "#" ? 1 : a.localeCompare(b)));
+
+      let activeLetter = "Tất cả";
+      let term = "";
+
+      letters.forEach((letter) => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "chip" + (letter === activeLetter ? " active" : "");
+        chip.textContent = letter;
+        chip.addEventListener("click", () => {
+          activeLetter = letter;
+          Array.from(letterRow.children).forEach((node) => node.classList.toggle("active", node.textContent === letter));
+          render();
+        });
+        letterRow.appendChild(chip);
+      });
+
+      function render() {
+        const visible = decorated.filter((item) => {
+          const byLetter = activeLetter === "Tất cả" || item.letter === activeLetter;
+          const byTerm = term.length === 0 || item.search.includes(term);
+          return byLetter && byTerm;
+        });
+
+        countEl.textContent = visible.length + " thuật ngữ";
+        if (!visible.length) {
+          host.innerHTML = '<div class="empty">Không tìm thấy thuật ngữ phù hợp.</div>';
+          return;
+        }
+
+        const groups = new Map();
+        visible.forEach((item) => {
+          if (!groups.has(item.letter)) groups.set(item.letter, []);
+          groups.get(item.letter).push(item);
+        });
+
+        const html = [];
+        Array.from(groups.keys()).sort((a, b) => a === "#" ? -1 : b === "#" ? 1 : a.localeCompare(b)).forEach((letter) => {
+          html.push('<section class="gloss-group"><h2>' + letter + '</h2><div class="gloss-items">');
+          groups.get(letter).forEach((item) => {
+            html.push('<div class="gloss-item"><div class="gloss-main"><span class="gloss-term">' + item.t +
+              '</span><span class="gloss-vi">' + item.vi + "</span></div>" +
+              (item.href ? '<a class="gloss-ch" href="' + item.href + '">Chương ' + item.c + "</a>" : "") +
+              "</div>");
+          });
+          html.push("</div></section>");
+        });
+        host.innerHTML = html.join("");
+      }
+
+      search.addEventListener("input", () => {
+        term = plain(search.value.trim());
+        render();
+      });
+
+      render();
+    })();
+  </script>
+  <script src="../assets/pwa.js"></script>
+</body>
+</html>

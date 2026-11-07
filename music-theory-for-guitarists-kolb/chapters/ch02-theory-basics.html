@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Chương 2 · Theory Basics — Guitar Theory</title>
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/shell.css">
+</head>
+<body data-page="chapter" data-book="mtg-kolb" data-chapter="ch02" data-data="CH02" data-root="../.." data-book-root="..">
+  <div class="backdrop"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar"></aside>
+    <div class="main">
+      <header class="topbar">
+        <button class="btn ghost small" id="menu-toggle" type="button" aria-label="Mở mục lục">☰</button>
+        <span class="crumb">Chương 02 / 13 · tr.8-15</span>
+        <button class="btn small" id="print-cheat" type="button">In cheat sheet</button>
+        <button class="btn small" id="theme-toggle" type="button">Sáng</button>
+      </header>
+
+      <article class="chapter">
+        <div class="eyebrow">Chương 02 <span>Theory Basics</span></div>
+        <h1>Nhạc lý cơ bản</h1>
+        <p class="lead">Ba thành phần của âm nhạc — melody, rhythm, harmony — được ghi bằng một hệ ký hiệu
+          chung. Nắm hệ ký hiệu này là điều kiện để đọc sách, đọc tab và đọc chart.</p>
+
+        <div class="big-picture">
+          <div class="eyebrow">Bức tranh lớn</div>
+          <p>Cao độ đi theo chiều dọc (vị trí trên khuông), thời gian đi theo chiều ngang (hình dạng nốt và ô nhịp).</p>
+        </div>
+
+        <section>
+          <h2><span class="kicker">Tự kiểm tra</span>5 điều bắt buộc nhớ</h2>
+          <ol class="recall">
+            <li><details><summary>Guitar dùng khóa gì, tên các dòng và khoảng?</summary>
+              <p>Khóa Sol (G clef). Dòng: E G B D F. Khoảng: F A C E.</p></details></li>
+            <li><details><summary>Số chỉ nhịp 3/4 nói điều gì?</summary>
+              <p>Số trên = số phách mỗi ô nhịp (3); số dưới = loại nốt nhận 1 phách (4 = nốt đen).</p></details></li>
+            <li><details><summary>Bảng trường độ cơ bản?</summary>
+              <p>Tròn 4 · trắng 2 · đen 1 · móc đơn 1/2 · móc kép 1/4 phách.</p></details></li>
+            <li><details><summary>Ba cách ghi hòa âm trên giấy?</summary>
+              <p>Chord stack (nốt chồng), tên hợp âm trên khuông, và chord frame (sơ đồ thế bấm).</p></details></li>
+            <li><details><summary>D.C., D.S. và Coda khác nhau thế nào?</summary>
+              <p>D.C. về đầu bài; D.S. về dấu Segno; Coda là đoạn kết, nhảy tới khi gặp "To Coda".</p></details></li>
+          </ol>
+        </section>
+
+        <section id="ghi-chu-khuong-nhac">
+          <h2><span class="kicker">Ghi chú</span>Khuông nhạc và khóa Sol</h2>
+          <p>Khuông nhạc có 5 dòng và 4 khoảng trống. Dòng đếm từ dưới lên (1–5), khoảng cũng từ dưới lên.
+            Guitar ghi ở khóa Sol — còn gọi là <em class="term">G clef</em> vì vòng xoắn của khóa ôm quanh dòng G.</p>
+          <p>Cao độ cao hơn thì nốt nằm cao hơn trên khuông. Đọc từ dưới lên theo đường dích dắc
+            (dòng–khoảng–dòng…) ta được bảng chữ cái âm nhạc liên tục: E–F–G–A–B–C–D–E–F…</p>
+
+          <figure>
+            <div id="fig-staff"></div>
+            <figcaption>Hình 1 — Dòng (E G B D F, nốt vàng) và khoảng (F A C E, nốt mờ) trên khóa Sol.</figcaption>
+          </figure>
+
+          <p>Những nốt ngoài khuông dùng <em class="term">ledger lines</em> (dòng phụ). Trong khóa Sol, chỉ có hai nốt
+            ngoài khuông không cần dòng phụ: G ngay trên khuông và D ngay dưới khuông. Khi quá cao, người ta ghi
+            bằng ký hiệu <code>8va</code> — chơi cao hơn một quãng 8 so với vị trí viết; mốc chuyển thường là
+            nốt G trên dòng phụ thứ tư. Guitar thực tế phát ra âm thanh thấp hơn một quãng 8 so với nốt ghi,
+            nên nhạc guitar luôn đọc "lùi" một quãng 8.</p>
+
+          <h3>Dấu hóa (accidentals)</h3>
+          <p>Bảng chữ cái chỉ có bảy tên, nhưng có 12 cao độ. Những nốt còn lại được đặt tên theo nốt tự nhiên
+            gần nhất bằng <em class="term">accidental</em>:</p>
+          <ul>
+            <li><strong>♯ (sharp)</strong> nâng nốt lên nửa cung — thêm 1 phím.</li>
+            <li><strong>♭ (flat)</strong> hạ nốt xuống nửa cung — bớt 1 phím.</li>
+            <li><strong>♮ (natural)</strong> hủy thăng/giáng trước đó, trả nốt về tự nhiên.</li>
+          </ul>
+          <p>Nốt giữa A và B có thể gọi là A♯ hoặc B♭ — hai tên, cùng một cao độ
+            (<em class="term">enharmonic</em>). Dấu hóa có hiệu lực cho <strong>mọi quãng tám</strong> của nốt đó
+            trong ô nhịp, không chỉ nốt đang ghi. Dấu ♮ cũng chỉ có hiệu lực trong ô nhịp hiện tại. Dấu hóa luôn
+            được viết <em>trước</em> đầu nốt.</p>
+        </section>
+
+        <section id="ghi-chu-nhip">
+          <h2><span class="kicker">Ghi chú</span>Ô nhịp và số chỉ nhịp</h2>
+          <p>Bài nhạc chia thành các <em class="term">measure</em> (ô nhịp) ngăn bởi vạch nhịp
+            (<em class="term">barline</em>). Vạch đôi kết thúc một đoạn; vạch cuối (đậm hơn) kết thúc bài.</p>
+          <p>Số chỉ nhịp nằm ngay sau khóa nhạc:</p>
+
+          <table>
+            <thead><tr><th>Ký hiệu</th><th>Nghĩa</th><th>Nốt nhận 1 phách</th></tr></thead>
+            <tbody>
+              <tr><td>4/4 (hoặc C)</td><td>4 phách mỗi ô</td><td>Nốt đen</td></tr>
+              <tr><td>3/4</td><td>3 phách mỗi ô</td><td>Nốt đen</td></tr>
+              <tr><td>6/8</td><td>6 phách mỗi ô</td><td>Nốt móc đơn</td></tr>
+            </tbody>
+          </table>
+
+          <div class="callout">Số dưới là "mẫu số" của nốt: 4 = nốt đen, 8 = nốt móc đơn. Nhìn số dưới trước,
+            rồi mới đếm số phách.</div>
+        </section>
+
+        <section id="ghi-chu-truong-do">
+          <h2><span class="kicker">Ghi chú</span>Trường độ: nốt, lặng và các biến thể</h2>
+
+          <table>
+            <thead><tr><th>Nốt</th><th>Giá trị</th><th>Dấu lặng tương ứng</th></tr></thead>
+            <tbody>
+              <tr><td>Tròn (whole)</td><td>4 phách</td><td>Lặng tròn</td></tr>
+              <tr><td>Trắng (half)</td><td>2 phách</td><td>Lặng trắng</td></tr>
+              <tr><td>Đen (quarter)</td><td>1 phách</td><td>Lặng đen</td></tr>
+              <tr><td>Móc đơn (eighth)</td><td>1/2 phách</td><td>Lặng móc đơn</td></tr>
+              <tr><td>Móc kép (sixteenth)</td><td>1/4 phách</td><td>Lặng móc kép</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Dấu chấm (dotted note)</h3>
+          <p>Chấm đặt sau nốt cộng thêm <strong>một nửa</strong> giá trị gốc: nốt đen chấm = 1,5 phách;
+            nốt trắng chấm = 3 phách. Dấu lặng cũng dùng chấm theo cùng quy tắc.</p>
+
+          <h3>Triplet</h3>
+          <p>Ba nốt chia đều khoảng thời gian của hai nốt cùng loại — thường thấy khi đếm "1-2-3" trong một phách.
+            Nhóm triplet có số <code>3</code> ghi phía trên.</p>
+
+          <h3>Tie và slur</h3>
+          <p><strong>Tie</strong> nối hai nốt <em>cùng cao độ</em>, cộng dồn trường độ thành một âm dài.
+            <strong>Slur</strong> nối hai nốt <em>khác cao độ</em>, nghĩa là chơi liền mạch (legato) hoặc
+            hammer-on/pull-off trên guitar.</p>
+
+          <h3>Beams</h3>
+          <p>Các nốt ngắn hơn 1 phách được nối bằng gạch ngang (beam) theo từng nhóm phách, giúp đọc nhịp
+            nhanh hơn nhiều so với các đuôi nốt rời. Cách đếm khi đọc:</p>
+          <ul>
+            <li>Móc đơn: <code>1 + 2 + 3 + 4 +</code>.</li>
+            <li>Móc kép: <code>1 e + a 2 e + a</code>.</li>
+            <li>Nhóm 3 nốt triplet đếm <code>1-2-3</code> gọn trong một phách.</li>
+          </ul>
+        </section>
+
+        <section id="ghi-chu-hop-am">
+          <h2><span class="kicker">Ghi chú</span>Ba cách ghi hòa âm</h2>
+          <ol>
+            <li><strong>Chord stack</strong> — các nốt chồng dọc trên khuông, đúng quy tắc cao độ.</li>
+            <li><strong>Tên hợp âm</strong> — chữ như <code>C</code>, <code>F</code>, <code>G7</code> viết trên
+              khuông, nhịp điệu ghi bằng gạch chéo (rhythm slashes).</li>
+            <li><strong>Chord frame</strong> — sơ đồ cần đàn thu nhỏ: dây 6 bên trái, dây 1 bên phải;
+              chấm = bấm phím, <code>o</code> = dây buông, <code>x</code> = tắt dây; đường đậm trên cùng là
+              <em class="term">nut</em>, đường cong nối nhiều dây là <em class="term">barre</em>. Số dưới frame là ngón
+              (1 trỏ, 2 giữa, 3 áp út, 4 út). Số bên phải frame cho biết vị trí phím (ví dụ <code>8fr</code>).</li>
+          </ol>
+
+          <figure>
+            <div id="fig-chords" style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center"></div>
+            <figcaption>Hình 2 — Ba thế bấm cơ bản: C, F (barre) và G7.</figcaption>
+          </figure>
+
+          <figure>
+            <div id="fig-chord-8fr" style="display:flex;justify-content:center"></div>
+            <figcaption>Hình 3 — Cùng thế bấm C nhưng đặt ở phím 8 (ghi <code>8fr</code>).</figcaption>
+          </figure>
+
+          <h3>Tab (tablature)</h3>
+          <p>Tab là hệ ghi trực quan cho guitar: mỗi dòng là một dây, <strong>dòng dưới cùng là dây 6</strong>,
+            số trên dòng là phím cần bấm, <code>0</code> là dây buông. Tab trong sách đặt ngay dưới khuông nhạc nên
+            không lặp lại thông tin nhịp; một tab đứng riêng thì không có nhịp, và đó là lý do nên đọc tab kèm
+            khuông (hoặc nghe bản thu) khi có thể.</p>
+
+          <figure>
+            <pre style="margin:0;font-family:ui-monospace,Consolas,monospace;font-size:14px;line-height:1.6;overflow-x:auto">e |-----------------|
+B |-----------------|
+G |-----------------|
+D |-----2-------0---|
+A |-3-------3-------|
+E |-----------------|</pre>
+            <figcaption>Hình 4 — Ví dụ tab: đọc từ trái sang phải, mỗi con số là một nốt cần bấm.</figcaption>
+          </figure>
+        </section>
+
+        <section id="ghi-chu-ky-hieu">
+          <h2><span class="kicker">Ghi chú</span>Ký hiệu đường đi và sắc thái</h2>
+          <p>Chart và sheet music dùng các "biển chỉ đường" để rút gọn việc lặp đoạn:</p>
+
+          <table>
+            <thead><tr><th>Ký hiệu</th><th>Nghĩa</th></tr></thead>
+            <tbody>
+              <tr><td><code>|:</code> … <code>:|</code></td><td>Lặp lại đoạn giữa hai dấu; số trên dấu cuối = số lần chơi.</td></tr>
+              <tr><td>1. / 2.</td><td>Lần đầu chơi ending 1; khi lặp bỏ qua ending 1, chơi ending 2. Sách lưu ý ending 3, 4… cũng không hiếm.</td></tr>
+              <tr><td>D.C. (Da Capo)</td><td>Quay về đầu bài.</td></tr>
+              <tr><td>D.S. (Dal Segno)</td><td>Quay về dấu 𝄋 (Segno).</td></tr>
+              <tr><td>To Coda / Coda</td><td>Lần đầu đi qua vẫn chơi tiếp; chỉ nhảy tới Coda khi có lệnh D.C./D.S. al Coda.</td></tr>
+              <tr><td>8va</td><td>Chơi cao hơn một quãng 8.</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Sắc thái và tốc độ</h3>
+          <table>
+            <thead><tr><th>Ký hiệu</th><th>Nghĩa</th></tr></thead>
+            <tbody>
+              <tr><td><code>p</code> / <code>pp</code></td><td>Nhỏ / rất nhỏ</td></tr>
+              <tr><td><code>mp</code> / <code>mf</code></td><td>Vừa nhỏ / vừa to</td></tr>
+              <tr><td><code>f</code> / <code>ff</code></td><td>To / rất to</td></tr>
+              <tr><td>cresc. / decresc.</td><td>To dần / nhỏ dần</td></tr>
+              <tr><td>accel. / ritard.</td><td>Nhanh dần / chậm dần</td></tr>
+              <tr><td>a tempo</td><td>Trở lại tốc độ ban đầu</td></tr>
+              <tr><td>staccato</td><td>Chơi ngắn, tắt tiếng ngay</td></tr>
+              <tr><td>accent (&gt;)</td><td>Nhấn mạnh nốt hơn các nốt xung quanh</td></tr>
+              <tr><td>rubato</td><td>Chơi tự do về nhịp, không đều máy móc</td></tr>
+              <tr><td>simile</td><td>Chơi tiếp theo cách tương tự</td></tr>
+              <tr><td>tutti</td><td>Tất cả cùng chơi</td></tr>
+              <tr><td>tacet</td><td>Không chơi</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2><span class="kicker">Thực hành</span>Áp lên đàn</h2>
+          <ul class="drills">
+            <li><b>1. Đọc nốt trên khuông</b>Viết ra giấy 10 nốt bất kỳ trong khoảng 5 dòng, đọc tên trong 10 giây.</li>
+            <li><b>2. Vỗ nhịp</b>Đặt metronome 4/4, vỗ nốt đen rồi chia đôi thành móc đơn, sau đó thử triplet.</li>
+            <li><b>3. Chord frame</b>Bấm C, F, G7 theo sơ đồ; mỗi hợp âm gọi tên từng dây (buông/tắt/bấm phím mấy).</li>
+            <li><b>4. Đọc chart</b>Chọn một bài có dấu lặp và D.C., viết ra thứ tự các đoạn sẽ chơi trước khi tập.</li>
+          </ul>
+        </section>
+
+        <section id="cheat-sheet" class="cheatsheet">
+          <h2><span class="kicker">Một trang</span>Cheat sheet</h2>
+          <div class="cheat-grid">
+            <div>
+              <h3>Khuông nhạc</h3>
+              <ul class="cheat-list">
+                <li>Dòng: E G B D F</li>
+                <li>Khoảng: F A C E</li>
+                <li>Khóa Sol = G clef</li>
+                <li>Ngoài khuông: ledger line; 8va từ nốt G dòng phụ 4</li>
+                <li>Dấu hóa: ♯ ♭ ♮, hiệu lực cả quãng 8 trong ô nhịp</li>
+              </ul>
+              <h3 style="margin-top:18px">Trường độ</h3>
+              <ul class="cheat-list">
+                <li>Tròn = 4</li>
+                <li>Trắng = 2</li>
+                <li>Đen = 1</li>
+                <li>Móc đơn = 1/2</li>
+                <li>Chấm = +1/2</li>
+                <li>Triplet = 3 trong 2</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Nhịp</h3>
+              <ul class="cheat-list">
+                <li>4/4 = C: 4 phách, đen = 1</li>
+                <li>3/4: 3 phách, đen = 1</li>
+                <li>6/8: 6 phách, móc đơn = 1</li>
+              </ul>
+              <h3 style="margin-top:18px">Hòa âm</h3>
+              <ul class="cheat-list">
+                <li>Chord stack</li>
+                <li>Tên hợp âm + slash</li>
+                <li>Chord frame: o x chấm</li>
+                <li>Tab: dòng dưới = dây 6</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Đường đi</h3>
+              <ul class="cheat-list">
+                <li>Lặp: |: :|</li>
+                <li>Ending 1 / 2</li>
+                <li>D.C. → về đầu</li>
+                <li>D.S. → về Segno</li>
+                <li>To Coda → nhảy Coda</li>
+                <li>8va → +1 quãng 8</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="extend">
+          <h2><span class="kicker">Ngoài sách</span>Mở rộng <span class="tag">bổ sung</span></h2>
+          <ul>
+            <li>Nếu sau này đọc đệm piano hoặc bass, làm quen thêm khóa Fa (bass clef); guitar vẫn dùng khóa Sol.</li>
+            <li>Phân biệt 6/8 và 3/4 bằng cảm giác: 6/8 chia hai nhóm ba (đung đưa), 3/4 là ba phách đều.</li>
+            <li>Tập đếm thành tiếng “1 e + a” chậm với metronome trước khi tăng tốc.</li>
+            <li>Trước khi tập chart mới, dùng bút chì đánh dấu Segno, Coda và các ending để không bỏ đoạn.</li>
+            <li>Đọc khuông kèm tab khi có cả hai: tab cho vị trí tay, khuông cho nhịp.</li>
+          </ul>
+        </section>
+
+        <div class="mark-read" style="margin-top:32px">
+          <button class="btn" id="mark-read" type="button">Đánh dấu đã đọc</button>
+          <span class="read-note" id="read-note">Đọc xong chương thì đánh dấu để tính tiến độ.</span>
+        </div>
+
+        <section class="quiz panel" id="quiz" style="margin-top:34px">
+          <div class="panel-head">
+            <h2><span class="kicker">Kiểm tra</span>Quiz</h2>
+            <span class="badge" id="quiz-meta">Câu 1</span>
+          </div>
+          <div id="quiz-body"></div>
+        </section>
+
+        <section class="cards" id="flashcards" style="margin-top:34px">
+          <div class="panel-head">
+            <h2><span class="kicker">Ghi nhớ chủ động</span>Flashcards</h2>
+            <span class="badge" id="cards-meta">1/22</span>
+          </div>
+          <div class="panel" id="cards-body"></div>
+        </section>
+
+        <nav class="pager">
+          <a href="ch01-fretboard.html"><span>Chương trước</span><strong>1 · Đọc cần đàn</strong></a>
+          <a class="next" href="ch03-scales-key-signatures.html"><span>Tiếp theo</span><strong>3 · Âm giai và dấu hóa</strong></a>
+        </nav>
+      </article>
+    </div>
+  </div>
+
+  <script src="../data/book.js"></script>
+  <script src="../data/ch02.js"></script>
+  <script src="../../assets/diagrams.js"></script>
+  <script src="../../assets/shell.js"></script>
+  <script src="../../assets/quiz.js"></script>
+  <script src="../../assets/cards.js"></script>
+  <script>
+    Diagrams.staff(document.getElementById("fig-staff"));
+    var chordHost = document.getElementById("fig-chords");
+    Diagrams.chordBox(chordHost, { name: "C", frets: [null, 3, 2, 0, 1, 0], fingers: ["", 3, 2, "", 1, ""] });
+    Diagrams.chordBox(chordHost, { name: "F", frets: [null, null, 3, 2, 1, 1], fingers: ["", "", 4, 3, 2, 1] });
+    Diagrams.chordBox(chordHost, { name: "G7", frets: [3, 2, 0, 0, 0, 1], fingers: [3, 2, "", "", "", 1] });
+    Diagrams.chordBox(document.getElementById("fig-chord-8fr"), { name: "C", frets: [null, null, 10, 9, 8, 8], fingers: ["", "", 3, 2, 1, 1], baseFret: 8 });
+  </script>
+  <script src="../../assets/pwa.js"></script>
+</body>
+</html>

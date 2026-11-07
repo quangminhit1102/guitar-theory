@@ -175,6 +175,7 @@
     const pct = Math.round((right / total) * 100);
     const wrong = results.filter((item) => item && !item.correct);
     window.GT.progress.saveQuiz(chapterId, pct);
+    document.dispatchEvent(new CustomEvent("gt:progress"));
 
     let verdict = "Cần ôn lại chương này.";
     if (pct === 100) verdict = "Hoàn hảo. Chuyển sang flashcard để giữ kiến thức.";
