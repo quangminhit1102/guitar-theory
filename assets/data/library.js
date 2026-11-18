@@ -5,6 +5,7 @@ window.LIBRARY = [
     code: "MTG",
     title: "Music Theory for Guitarists",
     author: "Tom Kolb",
+    version: "1.0",
     chapters: 13,
     built: true,
     keywords: ["guitar", "music theory", "nhạc lý", "guitar", "kolb", "hợp âm", "âm giai", "mode", "blues"]

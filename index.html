@@ -39,6 +39,17 @@
 
         <div class="book-grid" id="book-grid"></div>
 
+        <section class="panel sync-box" style="margin-top:22px">
+          <div class="panel-head"><h2><span class="kicker">Đồng bộ</span>Tiến độ giữa các thiết bị</h2></div>
+          <p class="read-note" style="margin:0">Xuất tiến độ ra file, rồi nhập lại trên thiết bị khác. Tiến độ được gộp lại, không bị ghi đè.</p>
+          <div class="quiz-foot" style="margin-top:12px">
+            <button class="btn" id="export-progress" type="button">Xuất tiến độ</button>
+            <button class="btn" id="import-progress" type="button">Nhập tiến độ</button>
+            <input id="import-file" type="file" accept="application/json,.json" hidden>
+          </div>
+          <p class="read-note" id="sync-note" hidden></p>
+        </section>
+
         <p class="install-hint" id="install-hint" hidden></p>
 
         <footer class="library-foot">

@@ -1092,3 +1092,11 @@ td code, p code, li code {
 .cheat-grid > div, .table-scroll, .book-body, .dash-grid > * { min-width: 0; }
 
 .cheat-grid > div { max-width: 100%; }
+
+.book-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+.update-badge { border-color: color-mix(in srgb, var(--accent) 60%, var(--line)); color: var(--accent); }
+
+.installed-badge { border-color: color-mix(in srgb, var(--good) 55%, var(--line)); color: var(--good); }
+
+.book-install { min-height: 36px; }
