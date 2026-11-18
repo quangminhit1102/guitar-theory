@@ -588,6 +588,56 @@
     host.hidden = false;
   }
 
+  function initSettings() {
+    if (document.getElementById("settings-modal")) return;
+    const modal = document.createElement("div");
+    modal.className = "modal";
+    modal.id = "settings-modal";
+    modal.hidden = true;
+    modal.innerHTML =
+      '<div class="modal-backdrop" data-close="1"></div>' +
+      '<div class="modal-panel" role="dialog" aria-modal="true" aria-label="Cài đặt">' +
+      '<div class="modal-head"><strong>Cài đặt</strong><button class="btn ghost small" type="button" data-close="1">Đóng</button></div>' +
+      '<div class="modal-body">' +
+      "<h3>Đồng bộ tiến độ</h3>" +
+      '<p class="read-note" id="sync-status"></p>' +
+      '<div class="quiz-foot">' +
+      '<button class="btn primary" id="sync-signin" type="button" hidden></button>' +
+      '<button class="btn" id="sync-now" type="button" hidden></button>' +
+      '<button class="btn" id="sync-signout" type="button" hidden></button>' +
+      "</div>" +
+      "<h3>Sao lưu (thủ công)</h3>" +
+      '<p class="read-note">Xuất hoặc nhập file. Tiến độ được gộp, không bị ghi đè.</p>' +
+      '<div class="quiz-foot">' +
+      '<button class="btn" id="export-progress" type="button">Xuất</button>' +
+      '<button class="btn" id="import-progress" type="button">Nhập</button>' +
+      '<input id="import-file" type="file" accept="application/json,.json" hidden>' +
+      "</div>" +
+      '<p class="read-note" id="sync-note" hidden></p>' +
+      "</div></div>";
+    document.body.appendChild(modal);
+
+    const toggle = document.getElementById("settings-toggle");
+    if (toggle) {
+      toggle.addEventListener("click", () => {
+        modal.hidden = false;
+        body.classList.add("modal-open");
+      });
+    }
+    modal.addEventListener("click", (ev) => {
+      if (ev.target.dataset && ev.target.dataset.close) {
+        modal.hidden = true;
+        body.classList.remove("modal-open");
+      }
+    });
+    document.addEventListener("keydown", (ev) => {
+      if (ev.key === "Escape" && !modal.hidden) {
+        modal.hidden = true;
+        body.classList.remove("modal-open");
+      }
+    });
+  }
+
   function initSync() {
     const exportBtn = document.getElementById("export-progress");
     const importBtn = document.getElementById("import-progress");
@@ -704,6 +754,7 @@
     initPrint();
     if (page === "dashboard") initDashboard();
     if (page === "library") initLibrary();
+    initSettings();
     initSync();
     if (isChapter) {
       GT.progress.touch(body.dataset.chapter);

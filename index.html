@@ -20,6 +20,7 @@
       <header class="topbar">
         <button class="btn ghost small" id="menu-toggle" type="button" aria-label="Mở mục lục">☰</button>
         <span class="crumb">Thư viện</span>
+        <button class="btn ghost small" id="settings-toggle" type="button" aria-label="Settings">⚙</button>
         <button class="btn small" id="theme-toggle" type="button"><span class="theme-label">Sáng</span></button>
       </header>
 
@@ -43,23 +44,6 @@
         </div>
 
         <div class="book-grid" id="book-grid"></div>
-
-        <section class="panel sync-box" style="margin-top:22px">
-          <div class="panel-head"><h2><span class="kicker">Đồng bộ</span>Tiến độ giữa các thiết bị</h2></div>
-          <p class="read-note" id="sync-status" style="margin:0"></p>
-          <div class="quiz-foot" style="margin-top:12px">
-            <button class="btn primary" id="sync-signin" type="button" hidden></button>
-            <button class="btn" id="sync-now" type="button" hidden></button>
-            <button class="btn" id="sync-signout" type="button" hidden></button>
-          </div>
-          <p class="read-note" style="margin-top:8px">Dự phòng thủ công: xuất/nhập file. Tiến độ được gộp, không bị ghi đè.</p>
-          <div class="quiz-foot" style="margin-top:8px">
-            <button class="btn" id="export-progress" type="button">Xuất tiến độ</button>
-            <button class="btn" id="import-progress" type="button">Nhập tiến độ</button>
-            <input id="import-file" type="file" accept="application/json,.json" hidden>
-          </div>
-          <p class="read-note" id="sync-note" hidden></p>
-        </section>
 
         <div class="quiz-foot" style="margin-top:12px">
           <button class="btn primary" id="install-app" type="button" hidden>Cài app</button>

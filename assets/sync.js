@@ -24,10 +24,10 @@
       };
 
   const SDK = "https://www.gstatic.com/firebasejs/10.12.0/";
-  const statusEl = document.getElementById("sync-status");
-  const signinBtn = document.getElementById("sync-signin");
-  const signoutBtn = document.getElementById("sync-signout");
-  const syncBtn = document.getElementById("sync-now");
+  let statusEl = null;
+  let signinBtn = null;
+  let signoutBtn = null;
+  let syncBtn = null;
 
   const cfg = window.FIREBASE_CONFIG || {};
   const configured = !!(cfg && cfg.projectId);
@@ -147,6 +147,10 @@
   }
 
   async function init() {
+    statusEl = document.getElementById("sync-status");
+    signinBtn = document.getElementById("sync-signin");
+    signoutBtn = document.getElementById("sync-signout");
+    syncBtn = document.getElementById("sync-now");
     if (!configured) {
       setStatus(L.notConfigured);
       renderButtons(false);
