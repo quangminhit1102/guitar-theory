@@ -56,7 +56,7 @@
 
   function renderButtons(signedIn) {
     if (signinBtn) {
-      signinBtn.hidden = !configured || signedIn;
+      signinBtn.hidden = !configured || !ready || signedIn;
       signinBtn.className = "btn google-btn";
       signinBtn.innerHTML = GOOGLE_G + "<span>" + L.signIn + "</span>";
     }
@@ -146,6 +146,7 @@
   }
 
   let currentUser = null;
+  let ready = false;
 
   async function ensureFirebase() {
     if (!configured) return false;
@@ -192,7 +193,19 @@
   }
 
   function signIn() {
-    if (!window.firebase) return;
+    if (!window.firebase) {
+      setStatus(L.syncError + " (not ready)");
+      ensureFirebase().then((ok) => {
+        if (ok) {
+          ready = true;
+          renderButtons(!!currentUser);
+          signIn();
+        } else {
+          setStatus(L.syncError + " (could not load)");
+        }
+      });
+      return;
+    }
     const provider = new window.firebase.auth.GoogleAuthProvider();
     window.firebase.auth().signInWithPopup(provider).catch((err) => {
       if (err.code === "auth/popup-blocked" || err.code === "auth/cancelled-popup-request" || err.code === "auth/popup-closed-by-user") {
@@ -219,12 +232,13 @@
       renderButtons(false);
       return;
     }
-    const ready = await ensureFirebase();
-    if (!ready) {
-      setStatus(L.syncError);
+    const loaded = await ensureFirebase();
+    if (!loaded) {
+      setStatus(L.syncError + " (could not load Firebase)");
       renderButtons(false);
       return;
     }
+    ready = true;
     renderButtons(false);
 
     if (accountBtn) {
