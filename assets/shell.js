@@ -597,24 +597,33 @@
     modal.innerHTML =
       '<div class="modal-backdrop" data-close="1"></div>' +
       '<div class="modal-panel" role="dialog" aria-modal="true" aria-label="Cài đặt">' +
-      '<div class="modal-head"><strong>Cài đặt</strong><button class="btn ghost small" type="button" data-close="1">Đóng</button></div>' +
+      '<div class="modal-head"><strong>Cài đặt</strong><button class="btn ghost small" type="button" data-close="1">✕</button></div>' +
       '<div class="modal-body">' +
-      "<h3>Đồng bộ tiến độ</h3>" +
+      '<div class="modal-section">' +
+      '<div class="modal-title">Tài khoản &amp; đồng bộ</div>' +
       '<p class="read-note" id="sync-account" hidden></p>' +
       '<p class="read-note" id="sync-status"></p>' +
       '<div class="quiz-foot">' +
-      '<button class="btn primary" id="sync-signin" type="button" hidden></button>' +
+      '<button class="btn google-btn" id="sync-signin" type="button" hidden></button>' +
       '<button class="btn" id="sync-now" type="button" hidden></button>' +
       '<button class="btn" id="sync-signout" type="button" hidden></button>' +
       "</div>" +
-      "<h3>Sao lưu (thủ công)</h3>" +
-      '<p class="read-note">Xuất hoặc nhập file. Tiến độ được gộp, không bị ghi đè.</p>' +
+      "</div>" +
+      '<div class="modal-section">' +
+      '<div class="modal-title">Cài app</div>' +
+      '<button class="btn primary" id="install-app" type="button" hidden>Cài app</button>' +
+      '<p class="read-note" id="install-hint" hidden></p>' +
+      "</div>" +
+      '<div class="modal-section">' +
+      '<div class="modal-title">Sao lưu</div>' +
+      '<p class="read-note">Xuất file để chuyển tiến độ sang máy khác, hoặc nhập để khôi phục. Tiến độ được gộp, không bị ghi đè.</p>' +
       '<div class="quiz-foot">' +
       '<button class="btn" id="export-progress" type="button">Xuất</button>' +
       '<button class="btn" id="import-progress" type="button">Nhập</button>' +
       '<input id="import-file" type="file" accept="application/json,.json" hidden>' +
       "</div>" +
-      '<p class="read-note" id="sync-note" hidden></p>' +
+      '<p class="read-note sync-feedback" id="sync-note" hidden></p>' +
+      "</div>" +
       "</div></div>";
     document.body.appendChild(modal);
 
