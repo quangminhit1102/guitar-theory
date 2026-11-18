@@ -3,7 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Thư viện nhạc lý">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
   <title>Thư viện nhạc lý</title>
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/shell.css">
 </head>
@@ -49,6 +54,10 @@
           </div>
           <p class="read-note" id="sync-note" hidden></p>
         </section>
+
+        <div class="quiz-foot" style="margin-top:12px">
+          <button class="btn primary" id="install-app" type="button" hidden>Cài app</button>
+        </div>
 
         <p class="install-hint" id="install-hint" hidden></p>
 

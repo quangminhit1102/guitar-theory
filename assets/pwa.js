@@ -24,6 +24,29 @@
     document.body.appendChild(banner);
   }
 
+  let deferredPrompt = null;
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    deferredPrompt = event;
+    const btn = document.getElementById("install-app");
+    if (btn) btn.hidden = false;
+  });
+  window.addEventListener("appinstalled", () => {
+    deferredPrompt = null;
+    const btn = document.getElementById("install-app");
+    if (btn) btn.hidden = true;
+  });
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest || !event.target.closest("#install-app")) return;
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+      const btn = document.getElementById("install-app");
+      if (btn) btn.hidden = true;
+    });
+  });
+
   navigator.serviceWorker.register(swUrl, { scope: scope }).then((registration) => {
     registration.addEventListener("updatefound", () => {
       const worker = registration.installing;
