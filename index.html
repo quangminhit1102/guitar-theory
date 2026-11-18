@@ -46,8 +46,14 @@
 
         <section class="panel sync-box" style="margin-top:22px">
           <div class="panel-head"><h2><span class="kicker">Đồng bộ</span>Tiến độ giữa các thiết bị</h2></div>
-          <p class="read-note" style="margin:0">Xuất tiến độ ra file, rồi nhập lại trên thiết bị khác. Tiến độ được gộp lại, không bị ghi đè.</p>
+          <p class="read-note" id="sync-status" style="margin:0"></p>
           <div class="quiz-foot" style="margin-top:12px">
+            <button class="btn primary" id="sync-signin" type="button" hidden></button>
+            <button class="btn" id="sync-now" type="button" hidden></button>
+            <button class="btn" id="sync-signout" type="button" hidden></button>
+          </div>
+          <p class="read-note" style="margin-top:8px">Dự phòng thủ công: xuất/nhập file. Tiến độ được gộp, không bị ghi đè.</p>
+          <div class="quiz-foot" style="margin-top:8px">
             <button class="btn" id="export-progress" type="button">Xuất tiến độ</button>
             <button class="btn" id="import-progress" type="button">Nhập tiến độ</button>
             <input id="import-file" type="file" accept="application/json,.json" hidden>
@@ -71,5 +77,7 @@
   <script src="assets/data/library.js"></script>
   <script src="assets/shell.js"></script>
   <script src="assets/pwa.js"></script>
+  <script src="assets/firebase-config.js"></script>
+  <script src="assets/sync.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const VERSION = "2026-11-18-2";
+const VERSION = "2026-11-18-3";
 const CACHE = "gt-static-" + VERSION;
 const BOOK = "music-theory-for-guitarists-kolb/";
 const CHAPTERS = [
@@ -27,6 +27,8 @@ const PRECACHE = [
   "assets/cards.js",
   "assets/diagrams.js",
   "assets/pwa.js",
+  "assets/firebase-config.js",
+  "assets/sync.js",
   "assets/favicon.svg",
   "assets/icons/icon-192.png",
   "assets/icons/icon-512.png",
