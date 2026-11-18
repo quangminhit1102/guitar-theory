@@ -600,6 +600,7 @@
       '<div class="modal-head"><strong>Cài đặt</strong><button class="btn ghost small" type="button" data-close="1">Đóng</button></div>' +
       '<div class="modal-body">' +
       "<h3>Đồng bộ tiến độ</h3>" +
+      '<p class="read-note" id="sync-account" hidden></p>' +
       '<p class="read-note" id="sync-status"></p>' +
       '<div class="quiz-foot">' +
       '<button class="btn primary" id="sync-signin" type="button" hidden></button>' +
@@ -765,6 +766,11 @@
   }
 
   document.addEventListener("gt:progress", refreshProgressUI);
+  document.addEventListener("gt:synced", () => {
+    if (page === "dashboard") initDashboard();
+    if (page === "library") initLibrary();
+    refreshProgressUI();
+  });
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);

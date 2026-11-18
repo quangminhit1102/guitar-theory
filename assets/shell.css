@@ -1114,3 +1114,9 @@ body.modal-open { overflow: hidden; }
   .modal { align-items: flex-end; padding: 0; }
   .modal-panel { width: 100%; max-height: 88vh; border-radius: 18px 18px 0 0; padding-bottom: calc(18px + env(safe-area-inset-bottom)); }
 }
+
+.google-btn { background: #fff; color: #3c4043; border: 1px solid var(--line); font-weight: 600; }
+.google-btn:hover { background: #f2f3f5; border-color: var(--line); }
+.google-btn span { margin-left: 10px; }
+.account-btn { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; padding: 6px 8px; }
+.avatar { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-weight: 700; font-size: 13px; }

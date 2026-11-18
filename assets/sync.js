@@ -3,22 +3,22 @@
     ? {
         notConfigured: "Chưa cấu hình đồng bộ (thiếu firebaseConfig).",
         signedOut: "Đăng nhập để đồng bộ tiến độ giữa các thiết bị.",
-        signedIn: "Đã đăng nhập: ",
+        signedInAs: "Đã đăng nhập: ",
         syncing: "Đang đồng bộ…",
         synced: "Đã đồng bộ ✓",
         syncError: "Đồng bộ lỗi. Kiểm tra kết nối.",
-        signIn: "Đăng nhập Google",
+        signIn: "Tiếp tục với Google",
         signOut: "Đăng xuất",
         syncNow: "Đồng bộ ngay"
       }
     : {
         notConfigured: "Sync not configured (missing firebaseConfig).",
         signedOut: "Sign in to sync progress across devices.",
-        signedIn: "Signed in as ",
+        signedInAs: "Signed in as ",
         syncing: "Syncing…",
         synced: "Synced ✓",
         syncError: "Sync failed. Check your connection.",
-        signIn: "Sign in with Google",
+        signIn: "Continue with Google",
         signOut: "Sign out",
         syncNow: "Sync now"
       };
@@ -28,18 +28,65 @@
   let signinBtn = null;
   let signoutBtn = null;
   let syncBtn = null;
+  let accountBtn = null;
+  let accountEl = null;
 
   const cfg = window.FIREBASE_CONFIG || {};
   const configured = !!(cfg && cfg.projectId);
+
+  const GOOGLE_G = '<svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">' +
+    '<path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>' +
+    '<path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>' +
+    '<path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>' +
+    '<path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>';
+
+  const USER_ICON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>';
 
   function setStatus(text) {
     if (statusEl) statusEl.textContent = text;
   }
 
+  function openSettings() {
+    const modal = document.getElementById("settings-modal");
+    if (modal) {
+      modal.hidden = false;
+      document.body.classList.add("modal-open");
+    }
+  }
+
   function renderButtons(signedIn) {
-    if (signinBtn) { signinBtn.hidden = !configured || signedIn; signinBtn.textContent = L.signIn; }
-    if (signoutBtn) { signoutBtn.hidden = !configured || !signedIn; signoutBtn.textContent = L.signOut; }
-    if (syncBtn) { syncBtn.hidden = !configured || !signedIn; syncBtn.textContent = L.syncNow; }
+    if (signinBtn) {
+      signinBtn.hidden = !configured || signedIn;
+      signinBtn.className = "btn google-btn";
+      signinBtn.innerHTML = GOOGLE_G + "<span>" + L.signIn + "</span>";
+    }
+    if (signoutBtn) {
+      signoutBtn.hidden = !configured || !signedIn;
+      signoutBtn.textContent = L.signOut;
+    }
+    if (syncBtn) {
+      syncBtn.hidden = !configured || !signedIn;
+      syncBtn.textContent = L.syncNow;
+    }
+    if (accountEl) {
+      accountEl.hidden = !configured || !signedIn;
+    }
+  }
+
+  function renderAccount(user) {
+    if (!accountBtn) return;
+    if (user) {
+      const name = user.displayName || user.email || "?";
+      accountBtn.classList.add("signed-in");
+      accountBtn.innerHTML = '<span class="avatar">' + name.charAt(0).toUpperCase() + "</span>";
+      accountBtn.title = name;
+      accountBtn.setAttribute("aria-label", name);
+    } else {
+      accountBtn.classList.remove("signed-in");
+      accountBtn.innerHTML = USER_ICON;
+      accountBtn.title = L.signIn;
+      accountBtn.setAttribute("aria-label", L.signIn);
+    }
   }
 
   function readLocal() {
@@ -98,9 +145,6 @@
     });
   }
 
-  let app = null;
-  let db = null;
-  let auth = null;
   let currentUser = null;
 
   async function ensureFirebase() {
@@ -111,9 +155,7 @@
       await loadScript(SDK + "firebase-auth-compat.js");
       await loadScript(SDK + "firebase-firestore-compat.js");
       if (!window.firebase) return false;
-      app = window.firebase.initializeApp(cfg);
-      auth = window.firebase.auth();
-      db = window.firebase.firestore();
+      window.firebase.initializeApp(cfg);
       return true;
     } catch (err) {
       return false;
@@ -121,8 +163,9 @@
   }
 
   async function sync() {
-    if (!configured || !currentUser || !db) return;
+    if (!configured || !currentUser || !window.firebase) return;
     setStatus(L.syncing);
+    const db = window.firebase.firestore();
     const ref = db.collection("users").doc(currentUser.uid).collection("data").doc("progress");
     try {
       const local = readLocal();
@@ -132,9 +175,11 @@
         try { remote = JSON.parse(snap.data().blob) || {}; } catch (err) { remote = {}; }
       }
       const merged = mergeObject(remote, local);
+      const changed = JSON.stringify(local) !== JSON.stringify(merged);
       writeLocal(merged);
       await ref.set({ blob: JSON.stringify(merged), updated: Date.now() }, { merge: true });
       setStatus(L.synced);
+      if (changed) document.dispatchEvent(new CustomEvent("gt:synced"));
     } catch (err) {
       setStatus(L.syncError);
     }
@@ -146,11 +191,22 @@
     debounceTimer = setTimeout(sync, 1200);
   }
 
+  function signIn() {
+    if (!window.firebase) return;
+    const provider = new window.firebase.auth.GoogleAuthProvider();
+    window.firebase.auth().signInWithPopup(provider).catch(() => {
+      window.firebase.auth().signInWithRedirect(provider).catch(() => {});
+    });
+  }
+
   async function init() {
     statusEl = document.getElementById("sync-status");
     signinBtn = document.getElementById("sync-signin");
     signoutBtn = document.getElementById("sync-signout");
     syncBtn = document.getElementById("sync-now");
+    accountBtn = document.getElementById("account-btn");
+    accountEl = document.getElementById("sync-account");
+
     if (!configured) {
       setStatus(L.notConfigured);
       renderButtons(false);
@@ -164,29 +220,32 @@
     }
     renderButtons(false);
 
-    if (signinBtn) {
-      signinBtn.addEventListener("click", () => {
-        const provider = new window.firebase.auth.GoogleAuthProvider();
-        window.firebase.auth().signInWithPopup(provider).catch(() => {
-          window.firebase.auth().signInWithRedirect(provider).catch(() => {});
-        });
+    if (accountBtn) {
+      accountBtn.addEventListener("click", () => {
+        if (currentUser) openSettings();
+        else signIn();
       });
     }
-    if (signoutBtn) {
-      signoutBtn.addEventListener("click", () => window.firebase.auth().signOut());
-    }
-    if (syncBtn) {
-      syncBtn.addEventListener("click", sync);
-    }
+    if (signinBtn) signinBtn.addEventListener("click", signIn);
+    if (signoutBtn) signoutBtn.addEventListener("click", () => window.firebase.auth().signOut());
+    if (syncBtn) syncBtn.addEventListener("click", sync);
 
     window.firebase.auth().onAuthStateChanged((user) => {
       currentUser = user;
+      renderAccount(user);
       renderButtons(!!user);
       if (user) {
-        setStatus(L.signedIn + (user.displayName || user.email));
+        const name = user.displayName || user.email;
+        if (accountEl) accountEl.textContent = L.signedInAs + name;
+        setStatus(L.syncing);
         sync();
       } else {
+        if (accountEl) accountEl.textContent = "";
         setStatus(L.signedOut);
+        if (document.body.dataset.page === "library" && !localStorage.getItem("gt.signinPrompt.v1")) {
+          localStorage.setItem("gt.signinPrompt.v1", "1");
+          openSettings();
+        }
       }
     });
 
