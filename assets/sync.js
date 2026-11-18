@@ -74,19 +74,37 @@
   }
 
   function renderAccount(user) {
-    if (!accountBtn) return;
-    if (user) {
-      const name = user.displayName || user.email || "?";
-      accountBtn.classList.add("signed-in");
-      accountBtn.innerHTML = '<span class="avatar">' + name.charAt(0).toUpperCase() + "</span>";
-      accountBtn.title = name;
-      accountBtn.setAttribute("aria-label", name);
-    } else {
-      accountBtn.classList.remove("signed-in");
-      accountBtn.innerHTML = USER_ICON;
-      accountBtn.title = L.signIn;
-      accountBtn.setAttribute("aria-label", L.signIn);
+    const name = user ? (user.displayName || user.email || "?") : "";
+    const apply = function (btn) {
+      if (!btn) return;
+      if (user) {
+        btn.classList.add("signed-in");
+        btn.innerHTML = '<span class="avatar">' + name.charAt(0).toUpperCase() + "</span>";
+        btn.title = name;
+        btn.setAttribute("aria-label", name);
+      } else {
+        btn.classList.remove("signed-in");
+        btn.innerHTML = USER_ICON;
+        btn.title = L.signIn;
+        btn.setAttribute("aria-label", L.signIn);
+      }
+    };
+    apply(accountBtn);
+    apply(document.getElementById("fab-account"));
+    const fabName = document.getElementById("fab-name");
+    if (fabName) {
+      if (user) { fabName.textContent = name; fabName.hidden = false; }
+      else { fabName.textContent = ""; fabName.hidden = true; }
     }
+  }
+
+  function clearLocalProgress() {
+    const keys = [];
+    for (let i = 0; i < localStorage.length; i += 1) {
+      const key = localStorage.key(i);
+      if (key && key.indexOf("gt.") === 0 && key !== "gt.theme.v1" && key !== "gt.signinPrompt.v1") keys.push(key);
+    }
+    keys.forEach((key) => localStorage.removeItem(key));
   }
 
   function readLocal() {
@@ -248,10 +266,19 @@
       });
     }
     if (signinBtn) signinBtn.addEventListener("click", signIn);
-    if (signoutBtn) signoutBtn.addEventListener("click", () => window.firebase.auth().signOut());
+    if (signoutBtn) {
+      signoutBtn.addEventListener("click", async () => {
+        if (currentUser) {
+          setStatus(L.syncing);
+          try { await sync(); } catch (err) { /* ignore */ }
+        }
+        window.firebase.auth().signOut();
+      });
+    }
     if (syncBtn) syncBtn.addEventListener("click", sync);
 
     window.firebase.auth().onAuthStateChanged((user) => {
+      const wasSignedIn = !!currentUser;
       currentUser = user;
       renderAccount(user);
       renderButtons(!!user);
@@ -261,6 +288,10 @@
         setStatus(L.syncing);
         sync();
       } else {
+        if (wasSignedIn) {
+          clearLocalProgress();
+          document.dispatchEvent(new CustomEvent("gt:synced"));
+        }
         if (accountEl) accountEl.textContent = "";
         setStatus(L.signedOut);
         if (document.body.dataset.page === "library" && !localStorage.getItem("gt.signinPrompt.v1")) {

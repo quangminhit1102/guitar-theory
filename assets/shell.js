@@ -571,6 +571,7 @@
     });
 
     if (article) article.classList.add("with-tabbar");
+    if (document.querySelector(".tabbar")) body.classList.add("has-tabbar");
   }
 
   function initPwaHint() {
@@ -646,6 +647,21 @@
         body.classList.remove("modal-open");
       }
     });
+
+    const fab = document.createElement("div");
+    fab.className = "account-fab";
+    fab.id = "account-fab";
+    fab.innerHTML =
+      '<button class="fab-btn" id="fab-account" type="button" aria-label="Account"></button>' +
+      '<span class="fab-name" id="fab-name" hidden></span>' +
+      '<button class="fab-btn" id="fab-settings" type="button" aria-label="Settings">⚙</button>';
+    document.body.appendChild(fab);
+    const openModal = function () {
+      modal.hidden = false;
+      body.classList.add("modal-open");
+    };
+    fab.querySelector("#fab-account").addEventListener("click", openModal);
+    fab.querySelector("#fab-settings").addEventListener("click", openModal);
   }
 
   function initSync() {
