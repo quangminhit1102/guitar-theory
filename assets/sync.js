@@ -194,8 +194,15 @@
   function signIn() {
     if (!window.firebase) return;
     const provider = new window.firebase.auth.GoogleAuthProvider();
-    window.firebase.auth().signInWithPopup(provider).catch(() => {
-      window.firebase.auth().signInWithRedirect(provider).catch(() => {});
+    window.firebase.auth().signInWithPopup(provider).catch((err) => {
+      if (err.code === "auth/popup-blocked" || err.code === "auth/cancelled-popup-request" || err.code === "auth/popup-closed-by-user") {
+        setStatus(L.syncError + " (" + err.code + ")");
+        window.firebase.auth().signInWithRedirect(provider).catch((err2) => {
+          setStatus(L.syncError + " (" + err2.code + ")");
+        });
+        return;
+      }
+      setStatus(L.syncError + " (" + err.code + ")");
     });
   }
 

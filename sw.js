@@ -1,4 +1,4 @@
-const VERSION = "2026-11-18-6";
+const VERSION = "2026-11-18-7";
 const CACHE = "gt-static-" + VERSION;
 const BOOK = "music-theory-for-guitarists-kolb/";
 const CHAPTERS = [
