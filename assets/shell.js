@@ -597,36 +597,38 @@
     modal.hidden = true;
     modal.innerHTML =
       '<div class="modal-backdrop" data-close="1"></div>' +
-      '<div class="modal-panel" role="dialog" aria-modal="true" aria-label="Cài đặt">' +
-      '<div class="modal-head"><strong>Cài đặt</strong><button class="btn ghost small" type="button" data-close="1">✕</button></div>' +
+      '<div class="modal-panel" role="dialog" aria-modal="true">' +
+      '<div class="modal-handle"></div>' +
+      '<div class="modal-head"><strong>Cài đặt</strong><button class="modal-close" type="button" data-close="1">✕</button></div>' +
       '<div class="modal-body">' +
       '<div class="modal-section">' +
-      '<div class="modal-title">Tài khoản &amp; đồng bộ</div>' +
-      '<p class="read-note" id="sync-account" hidden></p>' +
+      '<div class="modal-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-7.5-4M3 12a9 9 0 0 1 9-9 9 9 0 0 1 7.5 4"/><path d="M21 3v4h-4M3 21v-4h4"/></svg><span>Tài khoản &amp; đồng bộ</span></div>' +
+      '<p class="sync-account-row" id="sync-account" hidden></p>' +
       '<p class="read-note" id="sync-status"></p>' +
-      '<div class="quiz-foot">' +
       '<button class="btn google-btn" id="sync-signin" type="button" hidden></button>' +
+      '<div class="btn-row">' +
       '<button class="btn" id="sync-now" type="button" hidden></button>' +
-      '<button class="btn" id="sync-signout" type="button" hidden></button>' +
-      "</div>" +
-      "</div>" +
+      '<button class="btn danger" id="sync-signout" type="button" hidden></button>' +
+      '</div>' +
+      '</div>' +
       '<div class="modal-section">' +
-      '<div class="modal-title">Cài app</div>' +
-      '<button class="btn primary" id="install-app" type="button" hidden>Cài app</button>' +
-      '<p class="read-note" id="install-hint" hidden></p>' +
-      "</div>" +
+      '<div class="modal-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg><span>Cài app</span></div>' +
+      '<button class="btn primary block" id="install-app" type="button" hidden>Cài app</button>' +
+      '<p class="read-note hint" id="install-hint" hidden></p>' +
+      '</div>' +
       '<div class="modal-section">' +
-      '<div class="modal-title">Sao lưu</div>' +
-      '<p class="read-note">Xuất file để chuyển tiến độ sang máy khác, hoặc nhập để khôi phục. Tiến độ được gộp, không bị ghi đè.</p>' +
-      '<div class="quiz-foot">' +
+      '<div class="modal-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Sao lưu</span></div>' +
+      '<p class="read-note">Xuất file để chuyển tiến độ sang máy khác, hoặc nhập để khôi phục. Tiến độ được gộp, không ghi đè.</p>' +
+      '<div class="btn-row">' +
       '<button class="btn" id="export-progress" type="button">Xuất</button>' +
       '<button class="btn" id="import-progress" type="button">Nhập</button>' +
       '<input id="import-file" type="file" accept="application/json,.json" hidden>' +
-      "</div>" +
+      '</div>' +
       '<p class="read-note sync-feedback" id="sync-note" hidden></p>' +
-      "</div>" +
+      '</div>' +
+      '</div>' +
       '<div class="modal-version">Phiên bản v' + (window.APP_VERSION || "?") + "</div>" +
-      "</div></div>";
+      '</div>';
     document.body.appendChild(modal);
 
     const toggle = document.getElementById("settings-toggle");
