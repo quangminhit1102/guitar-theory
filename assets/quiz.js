@@ -28,6 +28,23 @@
       .replace(/\s+/g, " ");
   }
 
+  function shuffleOrder(n) {
+    const order = [];
+    for (let i = 0; i < n; i += 1) order.push(i);
+    for (let i = n - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const tmp = order[i];
+      order[i] = order[j];
+      order[j] = tmp;
+    }
+    if (n > 1) {
+      let same = true;
+      for (let i = 0; i < n; i += 1) { if (order[i] !== i) { same = false; break; } }
+      if (same) { const tmp = order[0]; order[0] = order[n - 1]; order[n - 1] = tmp; }
+    }
+    return order;
+  }
+
   function isCorrect(question, answer) {
     if (question.type === "mcq") return answer === question.answer;
     if (question.type === "fill") {
@@ -82,24 +99,27 @@
     wrap.innerHTML = '<p class="q-text">' + question.q + "</p>";
     const opts = document.createElement("div");
     opts.className = "opts";
-    question.options.forEach((option, i) => {
+    const order = shuffleOrder(question.options.length);
+    const answerPos = order.indexOf(question.answer);
+    for (let i = 0; i < question.options.length; i += 1) {
+      const original = order[i];
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "opt";
-      btn.innerHTML = '<span class="key">' + (i + 1) + "</span><span>" + option + "</span>";
+      btn.innerHTML = '<span class="key">' + (i + 1) + "</span><span>" + question.options[original] + "</span>";
       btn.addEventListener("click", () => {
         if (answered) return;
-        const correct = i === question.answer;
+        const correct = i === answerPos;
         if (correct) btn.classList.add("correct");
         else {
           btn.classList.add("wrong");
-          opts.children[question.answer].classList.add("correct");
+          opts.children[answerPos].classList.add("correct");
         }
         Array.from(opts.children).forEach((node) => { node.disabled = true; });
         markAnswer(correct);
       });
       opts.appendChild(btn);
-    });
+    }
     wrap.appendChild(opts);
     host.innerHTML = progressBar();
     host.appendChild(wrap);
