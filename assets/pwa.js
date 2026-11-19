@@ -47,14 +47,19 @@
     });
   });
 
-  navigator.serviceWorker.register(swUrl, { scope: scope }).then((registration) => {
+  navigator.serviceWorker.register(swUrl, { scope: scope, updateViaCache: "none" }).then((registration) => {
+    if (registration.waiting) showUpdate(registration.waiting);
     registration.addEventListener("updatefound", () => {
       const worker = registration.installing;
       if (!worker) return;
       worker.addEventListener("statechange", () => {
-        if (worker.state === "installed" && navigator.serviceWorker.controller) showUpdate(worker);
+        if (worker.state === "installed") {
+          if (navigator.serviceWorker.controller) showUpdate(worker);
+          else if (registration.waiting) showUpdate(registration.waiting);
+        }
       });
     });
+    registration.update().catch(() => {});
 
     let refreshing = false;
     navigator.serviceWorker.addEventListener("controllerchange", () => {
