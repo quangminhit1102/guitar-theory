@@ -13,12 +13,22 @@
     document.head.appendChild(link);
   }
 
+  function showLoading() {
+    if (document.getElementById("app-loading")) return;
+    const ov = document.createElement("div");
+    ov.id = "app-loading";
+    ov.className = "loading-overlay";
+    ov.innerHTML = '<div class="spinner"></div><div class="loading-text">Đang tải…</div>';
+    document.body.appendChild(ov);
+  }
+
   function showUpdate(worker) {
     if (document.querySelector(".update-banner")) return;
     const banner = document.createElement("div");
     banner.className = "update-banner";
     banner.innerHTML = '<span>Có bản mới của thư viện.</span><button class="btn small primary" type="button">Tải lại</button>';
     banner.querySelector("button").addEventListener("click", () => {
+      showLoading();
       worker.postMessage("SKIP_WAITING");
     });
     document.body.appendChild(banner);
@@ -65,6 +75,7 @@
     navigator.serviceWorker.addEventListener("controllerchange", () => {
       if (refreshing) return;
       refreshing = true;
+      showLoading();
       window.location.reload();
     });
   }).catch(() => {});

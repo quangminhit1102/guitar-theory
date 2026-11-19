@@ -412,7 +412,7 @@
     function installState(bk) {
       const installed = readJSON(INSTALL_KEY, {});
       const entry = installed[bk.id];
-      const latest = bk.version || "1.0";
+      const latest = window.APP_VERSION || bk.version || "1.0";
       if (!entry) return { state: "none", latest: latest };
       if (entry.version !== latest) return { state: "update", latest: latest, current: entry.version };
       return { state: "installed", latest: latest };
